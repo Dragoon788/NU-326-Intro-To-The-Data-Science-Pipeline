@@ -4,6 +4,7 @@
 
 This course aims to cover data science theory and tools for obtaining, cleaning, visualizing, modeling, and interpreting data. Most of the tools introduced in this course will be based on Python, although the theory can be applied to any programming language. Ethical data science will be consistently reinforced. As an outcome of this course, students should be able to independently derive insights from real-life datasets.
 
+
 ------
 
 ## Schedule
@@ -26,7 +27,7 @@ This schedule is tentative and may change as the course progresses.
 | 12 | 02.13.2025 | [Clustering Algorithms](https://drc-cs.github.io/WINTER25-CS326/lectures/L10_clustering/#/) | |
 | 13 | 02.18.2025 | [Recommendation Modeling](https://drc-cs.github.io/WINTER25-CS326/lectures/L11_recommendation_modeling/#/) | |
 | 14 | 02.20.2025 | [Time Series Analysis](https://drc-cs.github.io/WINTER25-CS326/lectures/L12_time_series/#/) | |
-| 15 | 02.25.2025 | [Natural Language Processing <br> *Classical NLP*](https://drc-cs.github.io/WINTER25-CS326/lectures/L13_nlp_I/#/) | H.04 |
+| 15 | 02.25.2025 | [Natural Language Processing <br> *Classical NLP*](https://drc-cs.github.io/WINTER25-CS326/lectures/L13_nlp_I/#/) | [H.04](https://canvas.northwestern.edu/courses/226962/assignments/1508090) |
 | 16 | 02.27.2025 | --- | |
 | 17 | 03.04.2025 | [Natural Language Processing <br> *Modern NLP*](https://drc-cs.github.io/WINTER25-CS326/lectures/L14_nlp_ii/#/) | |
 | 18 | 03.06.2025 | [Storytelling and Ethics](https://drc-cs.github.io/WINTER25-CS326/lectures/L15_ethics/#/) | |
