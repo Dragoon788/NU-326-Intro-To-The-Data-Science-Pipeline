@@ -31,7 +31,7 @@ def get_sql_query_basic() -> str:
         SQL query as a string.
     """
     query = """
-    INSERT_YOUR_QUERY_HERE.
+    SELECT * FROM PENGUINS
     """
     return query
 
@@ -48,8 +48,13 @@ def get_sql_query_challenge() -> str:
     Returns:
         SQL query as a string.
     """
+    
     query = """
-    INSERT_YOUR_QUERY_HERE.
+        SELECT species, sex, SUM(bill_length_mm) AS sum_bill_length_mm
+        FROM PENGUINS
+        WHERE sex='male'
+        GROUP BY species
+        ORDER BY sum_bill_length_mm
     """
     return query
 
@@ -69,7 +74,7 @@ def get_float64_column_names(df: pd.DataFrame) -> list[str]:
     Returns:
         List of strings with the float64 column names.
     """
-    raise NotImplementedError("You need to implement this function.")
+    return list(df.select_dtypes(include="float64").columns)
     
 def get_missing_value_indices(df: pd.DataFrame, column: str) -> list[int]:
     """Get the row indices of missing values within a column.
@@ -87,7 +92,8 @@ def get_missing_value_indices(df: pd.DataFrame, column: str) -> list[int]:
     Returns:
         Indices of missing values, as a list of ints.
     """
-    raise NotImplementedError("You need to implement this function.")
+    na_columns =  df[df[column].isna()]
+    return na_columns.index.tolist()
 
 def drop_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     """Drop rows with missing values.
@@ -101,7 +107,7 @@ def drop_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         DataFrame with missing values dropped.
     """
-    raise NotImplementedError("You need to implement this function.")
+    return df.dropna(axis='index')
 
 
 def fill_float64_cols_with_random_sample(df: pd.DataFrame, random_state=2024) -> pd.DataFrame:
@@ -171,7 +177,13 @@ def calculate_covariance_numpy(x: np.array, y: np.array) -> float:
     Returns:
         Covariance between x and y.
     """
-    raise NotImplementedError("You need to implement this function.")
+    diffx = np.subtract(x, np.mean(x)) # x-xbar array
+    diffy = np.subtract(y, np.mean(y)) # y-ybar array
+    multdiff = np.multiply(diffx, diffy) # array of diffx * diffy
+    sum = np.sum(multdiff)
+    n = x.size
+
+    return sum/n
 
 def calculate_pearson_correlation_numpy(x: np.array, y: np.array) -> float:
     """Use only numpy to calculate pearson's correlation coefficient.
@@ -187,7 +199,17 @@ def calculate_pearson_correlation_numpy(x: np.array, y: np.array) -> float:
     Returns:
         Pearson's correlation coefficient between x and y.
     """
-    raise NotImplementedError("You need to implement this function.")
+    diffx = np.subtract(x, np.mean(x)) # x-xbar array
+    diffy = np.subtract(y, np.mean(y)) # y-ybar array
+    multdiff = np.multiply(diffx, diffy) # array of diffx * diffy
+    numerator = np.sum(multdiff)
+
+    sumdiffxsquared = np.sum(np.square(diffx)) #sum value of diffx squared arrays
+    sumdiffysquared = np.sum(np.square(diffy)) # sum value of diffy squared arrays
+    sqrtxdiff = np.sqrt(sumdiffxsquared)
+    sqrtydiff = np.sqrt(sumdiffysquared)
+    denominator = sqrtxdiff*sqrtydiff
+    return numerator/denominator
     
 def calculate_pearson_correlation_scipy(x: np.array, y: np.array) -> float:
     """Use scipy to calculate pearson's correlation coefficient.
@@ -204,7 +226,8 @@ def calculate_pearson_correlation_scipy(x: np.array, y: np.array) -> float:
     Returns:
         Pearson's correlation coefficient between x and y.
     """
-    raise NotImplementedError("You need to implement this function.")
+    return scipy.stats.pearsonr(x, y).statistic
+    # raise NotImplementedError("You need to implement this function.")
     
 def calculate_spearman_correlation_scipy(x: np.array, y: np.array) -> float:
     """Use scipy to calculate spearman's correlation coefficient.
@@ -221,7 +244,8 @@ def calculate_spearman_correlation_scipy(x: np.array, y: np.array) -> float:
         Spearman's correlation coefficient between x and y.
     
     """
-    raise NotImplementedError("You need to implement this function.")
+    return scipy.stats.spearmanr(x,y).statistic
+    # raise NotImplementedError("You need to implement this function.")
    
 def perform_hypothesis_test(x: np.array, y: np.array) -> tuple[float, float]:
     """Use scipy to perform the appropriate hypothesis test.
@@ -246,7 +270,8 @@ def perform_hypothesis_test(x: np.array, y: np.array) -> tuple[float, float]:
     Returns:
         Test statistic and p-value (float, float).
     """
-    raise NotImplementedError("You need to implement this function.")
+    result = scipy.stats.ttest_ind(x, y)
+    return [result.statistic, result.pvalue]
     
 def check_normality(x: np.array) -> tuple[float, float]:
     """Check if a sample is normally distributed using Shapiro-Wilk test.
@@ -261,7 +286,8 @@ def check_normality(x: np.array) -> tuple[float, float]:
     Returns:
         Test statistic and p-value (float, float)from the Shapiro-Wilk test.
     """
-    raise NotImplementedError("You need to implement this function.")
+    result = scipy.stats.shapiro(x)
+    return [result.statistic, result.pvalue]
    
 def check_variance_homogeneity(x: np.array, y: np.array) -> tuple[float, float]:
     """Check if two samples have equal variance using Levene's test.
@@ -277,4 +303,5 @@ def check_variance_homogeneity(x: np.array, y: np.array) -> tuple[float, float]:
     Returns:
         Test statistic and p-value (float, float) from the Levene's test.
     """
-    raise NotImplementedError("You need to implement this function.")
+    result = scipy.stats.levene(x,y)
+    return [result.statistic, result.pvalue]

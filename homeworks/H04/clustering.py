@@ -16,7 +16,8 @@ def euclidean_distance(x: np.ndarray, y: np.ndarray) -> float:
     Returns:
         float : Euclidean distance.
     """
-    raise NotImplementedError("Please implement the euclidean_distance function.")
+    return (np.sqrt(np.sum(np.square(x-y))))
+
 
 def cosine_distance(x: np.ndarray, y: np.ndarray) -> float:
     """Compute cosine distance between two vectors.
@@ -31,7 +32,8 @@ def cosine_distance(x: np.ndarray, y: np.ndarray) -> float:
         float : Cosine distance.
 
     """
-    raise NotImplementedError("Please implement the cosine_distance function.")
+    return 1-(np.dot(x,y)/(np.linalg.norm(x)*np.linalg.norm(y)))
+
 
 def manhattan_distance(x: np.ndarray, y: np.ndarray) -> float:
     """Compute Manhattan distance between two vectors.
@@ -45,7 +47,7 @@ def manhattan_distance(x: np.ndarray, y: np.ndarray) -> float:
     Returns:
         float : Manhattan distance.
     """
-    raise NotImplementedError("Please implement the manhattan_distance function.")
+    return np.sum(np.abs(x-y))
 
 def pairwise_distance(X: np.ndarray, Y: np.ndarray, distance_method: Callable) -> np.ndarray:
     """
@@ -64,7 +66,17 @@ def pairwise_distance(X: np.ndarray, Y: np.ndarray, distance_method: Callable) -
     Returns: 
         np.ndarray of pairwise distances of shape (n_samples_1, n_samples_2).
     """
-    raise NotImplementedError("Please implement the pairwise_distance function.")
+    distances = np.zeros((X.shape[0], Y.shape[0]))
+
+    for i in range(X.shape[0]):
+        for j in range(Y.shape[0]):
+            # 1. Calculate the distance between the test sample and the training sample.
+            dist = distance_method(X[i], Y[j])
+            
+            # 2. Append the (distance, label) tuple to the distances list.
+            distances[i,j] = dist
+
+    return distances
 
 
 def k_means(X: np.ndarray, k: int, initial_centroids: np.ndarray, distance_method: Callable, max_iter: int = 5) -> tuple[np.ndarray, np.ndarray]:
@@ -93,26 +105,29 @@ def k_means(X: np.ndarray, k: int, initial_centroids: np.ndarray, distance_metho
 
     # Iterate until convergence or max_iter.
     for _ in range(max_iter):
-
         # 1. Compute distances between each sample and each centroid.
-
+        distances = pairwise_distance(X, centroids, distance_method)
         
         # 2. Assign each sample to the closest centroid.
-
+        nearest_centroid = np.argmin(distances, axis=1)
+        
         
         # 3. Exit the loop if labels do not change from previous iteration.
-
+        if np.array_equal(nearest_centroid, labels):
+            break
 
         # 4. Update labels.
+        labels = nearest_centroid
 
 
         # 5. Update k centroids to be the mean of all labeled samples.
-
-        raise NotImplementedError("Please implement the k_means function.")
-
+        for i in range(k):
+            group_k = X[labels == i]
+            if len(group_k) > 0:
+                centroids[i] = np.mean(group_k, axis = 0)
 
     # 6. Return final centroids and labels.
-    raise NotImplementedError("Please implement the k_means function.")
+    return centroids, labels
 
 
 
@@ -130,7 +145,8 @@ def dbscan(X: np.ndarray, eps: float, min_samples: int) -> np.ndarray:
     Returns:
         np.ndarray: Cluster labels of shape (n_samples,).
     """
-    raise NotImplementedError("Please implement the dbscan function.")
+    ans = DBSCAN(eps=eps, min_samples=min_samples).fit(X)
+    return ans.labels_
 
 
 def local_silhouette_score(X: np.ndarray, labels: np.ndarray, metric: str) -> float:
@@ -147,4 +163,5 @@ def local_silhouette_score(X: np.ndarray, labels: np.ndarray, metric: str) -> fl
     Returns:
         float: Silhouette score.
     """
-    raise NotImplementedError("Please implement the local_silhouette_score function.")
+    # print(labels)
+    return silhouette_score(X, labels, metric=metric)

@@ -18,7 +18,8 @@ def mse(predictions: np.ndarray, test: np.ndarray) -> float:
     Returns:
         float: Mean Squared Error.
     """
-    raise NotImplementedError("Please implement the mse function.")
+    array_to_sum = np.square(test - predictions)
+    return np.mean(array_to_sum)
 
 
 def walk_forward_validation_arima(train: np.ndarray, test: np.ndarray, order: tuple) -> np.ndarray:
@@ -46,20 +47,23 @@ def walk_forward_validation_arima(train: np.ndarray, test: np.ndarray, order: tu
     for sample in test:
 
         # 1. Initialize the ARIMA model from statsmodels.
-
+        model = ARIMA(endog=history, order=order)
 
         # 2. Fit ARIMA model.
-
+        response = model.fit()
         # 3. Forecast a single prediction (should be a float).
+        prediction = response.forecast()[0]
 
         # 4. Append prediction to predictions.
+        predictions.append(prediction)
 
         # 5. Append true value to history (i.e. walk-forward in loop).
-        raise NotImplementedError("Please implement the walk_forward_validation_arima loop.")
+        history.append(sample)
+        # raise NotImplementedError("Please implement the walk_forward_validation_arima loop.")
 
 
     # 6. Return np.ndarray of predictions.
-    raise NotImplementedError("Please implement the walk_forward_validation_arima loop.")
+    return np.array(predictions)
 
 def local_seasonal_decompose(data: pd.DataFrame, model: str) -> DecomposeResult:
     """Seasonal decomposition.
@@ -74,7 +78,8 @@ def local_seasonal_decompose(data: pd.DataFrame, model: str) -> DecomposeResult:
     Returns:
         DecomposeResult: Seasonal decomposition.
     """
-    raise NotImplementedError("Please implement the local_seasonal_decompose function.")
+    return seasonal_decompose(data)
+    # raise NotImplementedError("Please implement the local_seasonal_decompose function.")
 
 def difference(data: np.ndarray, order: int) -> np.ndarray:
     """Difference the data.
@@ -86,7 +91,10 @@ def difference(data: np.ndarray, order: int) -> np.ndarray:
     Returns:
         np.ndarray: Differenced data.
     """
-    raise NotImplementedError("Please implement the difference function.")
+    for i in range (0, order):
+        data = np.diff(data, axis=0)
+    return data
+    # raise NotImplementedError("Please implement the difference function.")
 
 def is_stationary(data: np.ndarray, alpha: float) -> bool:
     """Check if the data is stationary using Augmented Dickey-Fuller test.
@@ -101,4 +109,6 @@ def is_stationary(data: np.ndarray, alpha: float) -> bool:
     Returns:
         bool: True if stationary, False otherwise.
     """
-    raise NotImplementedError("Please implement the is_stationary function.")
+    test = adfuller(data)
+    return (test[1] < alpha)
+    # raise NotImplementedError("Please implement the is_stationary function.")
