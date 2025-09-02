@@ -1,0 +1,10 @@
+Question 1 . Assuming you did everything correct, you should see an interestingly classified point in the KMeans subplots at (-1.29, -1.73). What's interesting about this point, and why is it happening?
+
+Question 2. Why does KMeans excel with the blobs example, but fail on the concentric circles example? Please provide a detailed explanation of how K-Means works.
+
+Question 3. Why does DBScan perform better with the concentric circles problem in H.04? Please provide a detailed explanation, and make sure you explain the “epsilon” and "m" parameters.
+
+1. This point is interesting because depending on the distance metric, it is categorized as being in different clustoids. This is happening because the different distance metrics calculated vary just slightly and as a result it is some of the calculated distances leads the point being classified to do different clusters.
+
+2. Kmeans excels with the blobs example because of how it classifies clusters. Because kmeans is a partitional clustering algorithm, it's dividing the space in which belong to different clusters.. This fails in the concentric circles example because there is no way to partition the xy space in order to encapsulate the individual concentric circles. 
+3. DBScan performs better with the concentric circles problem because it's density base clustering algorithm finds groups of points that are closely packed in space. The algorithm uses epsilon in order to determine the radius in which we are searching for our m parameters - determining what is considered closely packed or dense in our feature space.

@@ -1,0 +1,26 @@
+Please answer the following questions related to the narrative in basic_statistics.ipynb. It's critical that you understand what the functions you wrote in H.02 are doing, and how to interpret your results! 
+
+ 
+
+Question 1. (Hypothesis 1) How would you describe the relationship between body mass and flipper length with pearsons correlation coefficient? Compare and contrast that with your covariance calculation. What benefits (over covariance) does your pearsons correlation measurement have?
+
+ 
+
+Question 2. (Hypothesis 2) Describe your thought process behind using the appropriate hypothesis test (in perform_hypothesis_test). 
+
+ 
+
+Question 3. (Hypothesis 2) Consider the test statistic you calculated. What is that saying? And what does the p-value indicate?
+
+1.
+
+Using the pearson's correlation coefficient, we can see that the relationship between body mass and flipper length is a positive near-linear relationship (as body mass increases linearly, flipper length also increases linearly). Our covariance calculation demonstrates that there is a strong positive relationship between the variables. The difference between our covariance calculation and pearson's coefficient, is that we can interpret the strength and linearity of body mass and flipper length relationship, while covariance only allows us to interpret the direction of their variability. Because Pearson's correlation measurement is scaled, it is more easily interpretable and comparable to other relationships' Pearson's measurement.
+
+
+2. 
+
+I decided to perform an independent T-Test because the flipper length of Adelie and Chinstrap penguins should be independent (the flipper lengths of Adelie should not affect the flipper lengths of Chinstrap), the means of both penguins' flipper length should be normally distributed, and because we are only working with two variables.
+
+3.
+
+Let our null hypothesis be that there is no difference in flipper lengths between Adelie and Chinstrap penguins. Let the alternative hypothesis be that there is a difference in their flipper lengths. Because our t-value is -5.6 with a p-value of 2.4*10^-8 (much smaller than 0.05) we can reject our null hypothesis and state their a clear difference in flipper lengths between Adelie and Chinstrap penguins.

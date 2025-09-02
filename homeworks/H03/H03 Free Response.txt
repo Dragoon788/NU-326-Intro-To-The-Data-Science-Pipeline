@@ -1,0 +1,19 @@
+Please answer the following questions related to H.03 (programming component) and L.07.
+
+ 
+
+Question 1. Briefly describe the steps involved in the k-Nearest Neighbors (KNN) algorithm (the brute force implementation we covered in class) and explain how changing the value of k can affect the model's performance.
+
+ 
+
+Question 2. How does L1 regularization affect coefficients in linear regression? How does L2 regularization differ from L1?
+
+ 
+
+Question 3. Where does the normal equation come from? How / why is it useful for finding the optimal slope & bias for a linear regression model?
+
+1. The brute force implementation requires you calculating the distance from 1 point to the rest of the points in the training set. Then we have to sort those distances by the minimal distance. Then we select the k minimal distances to find our k-nearest neighbors. Changing the value of k can reduce the variance and make it less sensitive to outliers. But also changing k can make the model overfitted and more likely to incorrectly identify.
+
+2. L1 regularization affects the coefficients in linear regression by pushing the coefficients to zero by penalizing larger coefficient values through the added cost. This effectively performs feature selection. L2 regularization affects the coefficients in linear regression by  shrinking the coefficients but not setting them to zero..
+
+3. The normal equation comes from setting the gradient of the cost function to 0. In linear regression, this is useful for finding the optimal slope and bias for our model because it helps us predict our model and also minimize the cost function.

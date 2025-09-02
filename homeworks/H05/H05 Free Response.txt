@@ -1,0 +1,9 @@
+Question 1. Explain in detail what p,d,q parameters are in an ARIMA model.
+
+ 
+
+Question 2. Which model performs better in your notebook (1, 1, 0) or (4, 1, 0)? Why?
+
+1. p is the parameter that represents the number of lag observations included in the model. d is the parameter that represents the number of times that raw observations are differenced. q is the parameter that represents the number of prediction errors included in the model.
+
+2. My (4,1,0) model performs better with a mean squared error of 0.15 vs (1,1,0) with a mean squared error of 0.19. This is due to the lag order being higher in my (4,1,0) model. This means that there the model better predicts behavior because the behavior of the graph is more generalizable to the entire graph - we use the previous 4 past observations to better model our behavior.

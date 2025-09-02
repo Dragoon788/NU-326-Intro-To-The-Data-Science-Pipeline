@@ -1,0 +1,12 @@
+What is the role of conda your development workflow (0.25 points)?
+What is the role of GitHub in your development workflow (0.25 points)?
+What is the role of vscode in your development workflow (0.25 points)
+What is the role of pytest in your development workflow (0.25 points)?
+
+We use Conda to create our environment to run our python and Jupiter code.
+
+GitHub is used for version control and allows us to work around bugs in our code.
+
+VS Code is our IDE for modifying and running our code files.
+
+PYTest is for unit testing and debugging our code.
